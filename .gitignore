@@ -1,0 +1,6 @@
+node_modules
+secrets.ts
+dbOutput
+yarn-error.log
+relevantLines.json
+output.txt
