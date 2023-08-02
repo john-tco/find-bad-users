@@ -44,13 +44,13 @@ const main = async () => {
 };
 
 const getSubFromCreatedBy = (createdBy: string) => {
-  const result = grant_applicant.find((user: any) => user.id === createdBy);
+  const result = grant_applicant.find((user: ApplicantUser) => user.id === createdBy);
   return result.user_id;
 };
 
 const getCreatedByForCurrentSubmissionid = (submissionId: string) => {
   const result = grant_submission.find(
-    (application: any) => application.id === submissionId
+    (application: GrantApplication) => application.id === submissionId
   );
   return result.created_by;
 };
@@ -89,10 +89,22 @@ function parseJwt(token: string) {
   return JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
 }
 
+type ApplicantUser = {
+  id : string
+  user_id : string
+}
+
+type GrantApplication = {
+  id : string
+  application_name : string
+  applicant_id : string
+  application_id : string
+}
+
 // const outputResultToJson = (result: string[]) => {
-//   writeFile('relevantLines.json', JSON.stringify(result), (err: any) => {
+//   writeFile('relevantLines.json', JSON.stringify(result), (err) => {
 //     if (err) {
-//       throw err;
+//       throw err; 
 //     }
 //     console.log('JSON data is saved.');
 //   });
